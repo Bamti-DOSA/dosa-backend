@@ -3,12 +3,12 @@
 
 <커밋 규칙>
 
-[FEAT] 새로운 기능
+feat: 새로운 기능
 
-[FIX] 버그 수정
+fix: 버그 수정
 
-[REFACTOR] 코드 정리
+refactor: 코드 정리
 
-[DOCS] 문서 수정 (README 등)
+docs: 문서 수정 (README 등)
 
-[CHORE] 설정 변경 (build.gradle 등)
+chore: 설정 변경 (build.gradle 등)
