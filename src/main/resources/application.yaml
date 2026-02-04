@@ -10,11 +10,13 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update
+      # [수정] 환경변수가 없으면 'update' (로컬용), 있으면 그 값 사용 (배포용)
+      ddl-auto: ${JPA_DDL_AUTO:update}
     properties:
       hibernate:
         format_sql: true
-        show_sql: true
+        # [수정] 환경변수가 없으면 'true' (로컬용), 있으면 그 값 사용 (배포용)
+        show_sql: ${JPA_SHOW_SQL:true}
 
   # [S3 설정] 환경변수 사용
   cloud:
