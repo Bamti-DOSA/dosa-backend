@@ -47,15 +47,14 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            # 1. 좀비 프로세스까지 확실하게 정리
-            pgrep -f dosa | xargs -r kill -9
-            
-            # 2. 포트 정리될 때까지 넉넉히 대기
-            sleep 5
-            
-            # 3. [수정] 메모리 제한을 400m -> 256m로 축소 (t3.micro 최적화)
-            # plain jar가 아닌 '실행 가능한 jar'만 찾아서 실행하도록 구체적으로 지정
-            nohup java -Xmx256m -jar /home/${{ secrets.EC2_USERNAME }}/app/dosa-0.0.1-SNAPSHOT.jar > /home/${{ secrets.EC2_USERNAME }}/app/app.log 2>&1 < /dev/null &
-            
-            # 4. 배포 스크립트 종료 보장
+            pkill -f dosa || true
+            sleep 10
+
+            nohup java \
+              -Xms128m \
+              -Xmx256m \
+              -XX:+UseSerialGC \
+              -jar /home/${{ secrets.EC2_USERNAME }}/app/dosa-0.0.1-SNAPSHOT.jar \
+              > /home/${{ secrets.EC2_USERNAME }}/app/app.log 2>&1 &
+
             sleep 5
