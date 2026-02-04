@@ -34,13 +34,17 @@ public class CustomBotController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "prompt는 필수입니다.");
         }
         // 시스템 프롬프트 선택
-        ProductSystemPrompt prodPrompt;
-
-              try {
-                   prodPrompt = ProductSystemPrompt.valueOf(body.getSystem().toUpperCase());
-               } catch (IllegalArgumentException ex) {
-                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid system prompt");
+        //NPE 오류 수정 !
+        String system = body.getSystem();
+              if (system == null || system.isBlank()) {
+                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "system은 필수입니다.");
               }
+                       ProductSystemPrompt prodPrompt;
+             try {
+                prodPrompt = ProductSystemPrompt.valueOf(system.trim().toUpperCase());
+            } catch (IllegalArgumentException ex) {
+                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid system prompt");
+                }
         //request 생성 !
         ChatGptRequest request = new ChatGptRequest(model);
         //시스템 프롬프트
