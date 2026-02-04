@@ -2,12 +2,14 @@ package com.bamti.dosa.ai.dto;
 
 import lombok.Data;
 import com.bamti.dosa.ai.dto.Message;
+import lombok.Getter;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
+
 public class ChatGptRequest {
     private String model;
     private List<Message> messages=new ArrayList<>();
@@ -23,5 +25,11 @@ public class ChatGptRequest {
 
     public void addUserMessage(String content) {
         this.messages.add(new Message("user", content));
+    }
+    public void addAssistantMessage(String content) {
+        this.messages.add(new Message("assistant", content));
+    }
+    public void addContextMessage(String content) {
+        this.messages.add(new Message("assistant", content));
     }
 }
