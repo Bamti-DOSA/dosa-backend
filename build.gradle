@@ -1,6 +1,6 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '4.0.2'
+	id 'org.springframework.boot' version '3.2.2'
 	id 'io.spring.dependency-management' version '1.1.7'
 }
 
@@ -26,29 +26,31 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
-	implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+
+	// [수정] 여기가 범인이었습니다! (mvc 삭제)
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// [아까 추가한 것들]
+	implementation 'io.awspring.cloud:spring-cloud-aws-starter-s3:3.1.0'
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa-test'
-	testImplementation 'org.springframework.boot:spring-boot-starter-security-test'
-	testImplementation 'org.springframework.boot:spring-boot-starter-validation-test'
-	testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-	// [추가] AWS S3 (3D 파일 저장용)
-	// Spring Boot 3.x 호환 버전 사용 권장
-	//implementation 'io.awspring.cloud:spring-cloud-aws-starter-s3:3.0.1'
-
-	// [추가] JWT (로그인 토큰용)
-	//implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
-	//runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
-	//runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+	// 테스트 라이브러리들도 정리 (보통 이거 하나면 다 됩니다)
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+// [추가] plain jar 생성 방지 (이게 없으면 실행 안 되는 파일이 덮어씌워질 수 있음)
+tasks.named("jar") {
+	enabled = false
 }

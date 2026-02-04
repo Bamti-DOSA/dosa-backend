@@ -15,6 +15,7 @@ spring:
       hibernate:
         format_sql: true # 실행되는 SQL을 예쁘게 보여줌
         show_sql: true   # 실행되는 SQL을 로그에 찍음
+    open-in-view: false
 
   # 한글 깨짐 방지
   server:
@@ -23,3 +24,4 @@ spring:
         force: true
         charset: UTF-8
         enabled: true
+    port: ${SERVER_PORT:8080}
