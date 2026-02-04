@@ -51,3 +51,8 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+// [추가] plain jar 생성 방지 (이게 없으면 실행 안 되는 파일이 덮어씌워질 수 있음)
+tasks.named("jar") {
+	enabled = false
+}
