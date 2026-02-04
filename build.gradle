@@ -41,12 +41,12 @@ dependencies {
 
 	// [추가] AWS S3 (3D 파일 저장용)
 	// Spring Boot 3.x 호환 버전 사용 권장
-	implementation 'io.awspring.cloud:spring-cloud-aws-starter-s3:3.0.1'
+	//implementation 'io.awspring.cloud:spring-cloud-aws-starter-s3:3.0.1'
 
 	// [추가] JWT (로그인 토큰용)
-	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
-	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
-	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+	//implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	//runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	//runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 }
 
 tasks.named('test') {

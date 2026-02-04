@@ -1,0 +1,23 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/blaybus_bamti?serverTimezone=Asia/Seoul
+    username: root
+    password: ${MYSQL_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+
+openai:
+  api-key: ${OPENAI_API_KEY}
+  model: gpt-5-mini
+  api:
+    url: https://api.openai.com/v1/chat/completions

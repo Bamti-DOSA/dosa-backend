@@ -33,7 +33,8 @@ public class SecurityConfig {
                                 "/api/topics/**",    // 3D 모델 조회
                                 "/api/models/**",    // 파일 다운로드
                                 "/swagger-ui/**",    // (선택) 문서화
-                                "/v3/api-docs/**"
+                                "/v3/api-docs/**",
+                                "/api/chat"
                         ).permitAll()
                         .anyRequest().authenticated() // 그 외는 로그인 필요
                 );
