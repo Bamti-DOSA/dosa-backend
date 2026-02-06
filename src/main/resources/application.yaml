@@ -2,22 +2,6 @@ spring:
   application:
     name: dosa
 
-  datasource:
-    url: jdbc:mysql://localhost:3306/dosa_db?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-    username: root
-    password: root
-    driver-class-name: com.mysql.cj.jdbc.Driver
-
-  jpa:
-    hibernate:
-      # [수정] 환경변수가 없으면 'update' (로컬용), 있으면 그 값 사용 (배포용)
-      ddl-auto: ${JPA_DDL_AUTO:update}
-    properties:
-      hibernate:
-        format_sql: true
-        # [수정] 환경변수가 없으면 'true' (로컬용), 있으면 그 값 사용 (배포용)
-        show_sql: ${JPA_SHOW_SQL:true}
-
   # [S3 설정] 환경변수 사용
   cloud:
     aws:

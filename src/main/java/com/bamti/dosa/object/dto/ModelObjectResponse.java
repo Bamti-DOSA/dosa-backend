@@ -1,10 +1,8 @@
 package com.bamti.dosa.object.dto;
 
-import com.bamti.dosa.object.entity.ModelObject;
 import lombok.Builder;
 import lombok.Getter;
-
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Builder
@@ -14,19 +12,15 @@ public class ModelObjectResponse {
     private String type;
     private String description;
     private String thumbnailUrl;
-    private boolean bookmarked;
-    private LocalDateTime lastAccessedAt;
+    private String assemblyModelUrl;
 
-    // Entity -> DTO 변환 메서드 (편의상 여기에 만듭니다)
-    public static ModelObjectResponse from(ModelObject entity) {
-        return ModelObjectResponse.builder()
-                .objectId(entity.getObjectId())
-                .name(entity.getName())
-                .type(entity.getType())
-                .description(entity.getDescription())
-                .thumbnailUrl(entity.getThumbnailUrl())
-                .bookmarked(entity.isBookmarked())
-                .lastAccessedAt(entity.getLastAccessedAt())
-                .build();
+    private List<PartDto> parts;
+
+    @Getter
+    @Builder
+    public static class PartDto {
+        private String name;      // 화면에 보일 한글 이름 (예: "메인 샤프트")
+        private String meshName;  // ★ 3D 모델 내부의 영문 ID (예: "shaft_main")
+        private String description; // 부품 설명
     }
 }
