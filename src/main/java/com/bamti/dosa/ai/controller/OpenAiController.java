@@ -5,6 +5,7 @@ import com.bamti.dosa.ai.domain.enums.ProductSystemPrompt;
 import com.bamti.dosa.ai.dto.ChatGptRequest;
 import com.bamti.dosa.ai.dto.ChatGptResponse;
 import com.bamti.dosa.ai.dto.ChatRequestBody;
+import com.bamti.dosa.ai.dto.ChatResponseDto;
 import com.bamti.dosa.ai.service.OpenAiService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,7 +27,7 @@ public class OpenAiController {
 
 
     @PostMapping("/chat")
-    public String chat(@RequestBody ChatRequestBody body)
+    public ChatResponseDto chat(@RequestBody ChatRequestBody body)
     {
         if (body.getPrompt() == null || body.getPrompt().isBlank()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "prompt는 필수입니다.");
@@ -50,8 +51,21 @@ public class OpenAiController {
         //유저 프롬프트
         request.addUserMessage(body.getPrompt());
 
+        //ai 호출
         ChatGptResponse response = openAiService.call(request);
-        return response.getChoices().get(0).getMessage().getContent();
+
+        //NULL 안정성 체크
+        if (response == null || response.getChoices() == null || response.getChoices().isEmpty()) {
+        return ChatResponseDto.fail("OpenAI로부터 응답을 받지 못했습니다.");
+    }
+
+        String content = response.getChoices().get(0).getMessage().getContent();
+
+        if (content == null || content.isBlank()) {
+            return ChatResponseDto.fail("응답 내용이 비어있습니다.");
+        }
+
+        return ChatResponseDto.success(content);
 
     }
 }

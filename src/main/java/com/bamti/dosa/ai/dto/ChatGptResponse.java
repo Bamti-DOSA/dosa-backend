@@ -20,6 +20,18 @@ public class ChatGptResponse {
         private int index;
         private Message message;
     }
+    public String getFirstMessageContent() {
+        if (choices == null || choices.isEmpty()) {
+            return null;
+        }
+
+        Choice firstChoice = choices.get(0);
+        if (firstChoice == null || firstChoice.getMessage() == null) {
+            return null;
+        }
+
+        return firstChoice.getMessage().getContent();
+    }
 
 
 }

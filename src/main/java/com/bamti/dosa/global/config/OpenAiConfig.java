@@ -21,8 +21,8 @@ public class OpenAiConfig {
     public RestTemplate openAiRestTemplate(RestTemplateBuilder builder) {
         {
             RestTemplate restTemplate = builder
-                    .setConnectTimeout(Duration.ofSeconds(5))
-                    .setReadTimeout(Duration.ofSeconds(30))
+                    .setConnectTimeout(Duration.ofSeconds(10))
+                    .setReadTimeout(Duration.ofSeconds(120))
                     .build();
             restTemplate.getInterceptors().add((request, body, execution) ->
             {
