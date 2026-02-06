@@ -35,6 +35,7 @@ public class AiAssistantChat {
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
+    @Column(name = "updated_at") private LocalDateTime updatedAt;
 
     //대화내역(List)을 MySQL JSON 컬럼에 저장
     @JdbcTypeCode(SqlTypes.JSON)

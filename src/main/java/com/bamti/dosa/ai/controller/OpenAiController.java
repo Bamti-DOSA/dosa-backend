@@ -5,26 +5,24 @@ import com.bamti.dosa.ai.domain.enums.ProductSystemPrompt;
 import com.bamti.dosa.ai.dto.ChatGptRequest;
 import com.bamti.dosa.ai.dto.ChatGptResponse;
 import com.bamti.dosa.ai.dto.ChatRequestBody;
-import com.bamti.dosa.ai.dto.Message;
+import com.bamti.dosa.ai.service.OpenAiService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/api")
-public class CustomBotController {
+@RequiredArgsConstructor
+public class OpenAiController {
     @Value("${openai.model}")
     private String model;
 
     @Value("${openai.api.url}")
     private String apiURL;
 
-    @Autowired
-    private RestTemplate template;
-
+    private final OpenAiService openAiService;
 
 
     @PostMapping("/chat")
@@ -52,13 +50,8 @@ public class CustomBotController {
         //유저 프롬프트
         request.addUserMessage(body.getPrompt());
 
-        ChatGptResponse chatGptResponse = template.postForObject(apiURL, request, ChatGptResponse.class);
-                if (chatGptResponse == null
-                           || chatGptResponse.getChoices() == null
-                           || chatGptResponse.getChoices().isEmpty()
-                           || chatGptResponse.getChoices().get(0).getMessage() == null) {
-                   throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, "OpenAI 응답이 비어 있습니다.");
-               }
-              return chatGptResponse.getChoices().get(0).getMessage().getContent();
+        ChatGptResponse response = openAiService.call(request);
+        return response.getChoices().get(0).getMessage().getContent();
+
     }
 }
