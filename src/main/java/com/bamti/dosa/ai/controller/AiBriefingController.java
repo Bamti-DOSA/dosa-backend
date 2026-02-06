@@ -16,14 +16,15 @@ public class AiBriefingController {
     private final AiBriefingService aiBriefingService;
 
     @PostMapping("/ai/briefing")
-        public AiBriefingResponse summarize(@RequestBody AiBriefingRequest req) {
-                if (req.getMessages() == null || req.getMessages().isEmpty()) {
-                        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "messages는 필수입니다.");
-                   }
-        return aiBriefingService.summarize(req);
+   public AiBriefingResponse summarize(@RequestBody AiBriefingRequest req) {
+        if (req.getMessages() == null || req.getMessages().isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "messages는 필수입니다.");
+        }
+        try {
+            return aiBriefingService.summarize(req);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "브리핑 생성 중 오류가 발생했습니다.");
+        }
+
     }
-
-
-
-
 }

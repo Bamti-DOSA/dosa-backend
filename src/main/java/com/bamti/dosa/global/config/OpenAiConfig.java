@@ -4,6 +4,7 @@ package com.bamti.dosa.global.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 
@@ -18,6 +19,7 @@ public class OpenAiConfig {
     private String openAiKey;
 
     @Bean("openAiRestTemplate")
+    @Primary
     public RestTemplate openAiRestTemplate(RestTemplateBuilder builder) {
         {
             RestTemplate restTemplate = builder
