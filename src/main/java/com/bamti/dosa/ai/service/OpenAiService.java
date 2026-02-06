@@ -39,10 +39,16 @@ public class OpenAiService {
             return response;
 
         } catch (HttpClientErrorException e) { // 4xx
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST,
-                    "OpenAI 요청 오류(" + e.getStatusCode() + "): " + safeBody(e)
-            );
+            if (e.getStatusCode().value() == 429) {
+                                throw new ResponseStatusException(
+                                                HttpStatus.SERVICE_UNAVAILABLE,
+                                               "OpenAI 요청 한도 초과: " + safeBody(e)
+                                              );
+                        }
+                      throw new ResponseStatusException(
+                                        HttpStatus.BAD_GATEWAY,
+                                       "OpenAI 요청 오류(" + e.getStatusCode() + "): " + safeBody(e)
+                                       );
 
         } catch (HttpServerErrorException e) { // 5xx
             throw new ResponseStatusException(

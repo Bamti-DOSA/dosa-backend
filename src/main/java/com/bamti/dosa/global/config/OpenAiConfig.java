@@ -11,22 +11,25 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import java.time.Duration;
 
 @Configuration
-public class OpenAiConfig
-{
+public class OpenAiConfig {
 
     @Value("${openai.api-key}")
+
     private String openAiKey;
- @Bean
-           public RestTemplate template(RestTemplateBuilder builder) {
-         RestTemplate restTemplate = builder
-                        .setConnectTimeout(Duration.ofSeconds(5))
-                        .setReadTimeout(Duration.ofSeconds(30))
-                 .build();
-        restTemplate.getInterceptors().add((request,body,execution) ->
+
+    @Bean("openAiRestTemplate")
+    public RestTemplate openAiRestTemplate(RestTemplateBuilder builder) {
         {
-            request.getHeaders().add("Authorization","Bearer "+openAiKey);
-            return execution.execute(request,body);
-        });
-        return restTemplate;
+            RestTemplate restTemplate = builder
+                    .setConnectTimeout(Duration.ofSeconds(5))
+                    .setReadTimeout(Duration.ofSeconds(30))
+                    .build();
+            restTemplate.getInterceptors().add((request, body, execution) ->
+            {
+                request.getHeaders().add("Authorization", "Bearer " + openAiKey);
+                return execution.execute(request, body);
+            });
+            return restTemplate;
+        }
     }
 }
