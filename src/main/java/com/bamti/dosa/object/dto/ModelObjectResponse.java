@@ -14,7 +14,7 @@ public class ModelObjectResponse {
     private String type;
     private String description;
     private String thumbnailUrl;
-    private boolean isBookmarked;
+    private boolean bookmarked;
     private LocalDateTime lastAccessedAt;
 
     // Entity -> DTO 변환 메서드 (편의상 여기에 만듭니다)
@@ -25,7 +25,7 @@ public class ModelObjectResponse {
                 .type(entity.getType())
                 .description(entity.getDescription())
                 .thumbnailUrl(entity.getThumbnailUrl())
-                .isBookmarked(entity.isBookmarked())
+                .bookmarked(entity.isBookmarked())
                 .lastAccessedAt(entity.getLastAccessedAt())
                 .build();
     }
