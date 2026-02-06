@@ -20,6 +20,14 @@ public class S3Config {
     @Value("${spring.cloud.aws.region.static}")
     private String region;
 
+    /**
+     * Provide a configured S3Presigner for generating pre-signed S3 requests.
+     *
+     * The presigner is configured with the application's AWS region and static credentials
+     * (read from configuration properties) and will be closed when the application context shuts down.
+     *
+     * @return an S3Presigner configured with the application's AWS region and static credentials
+     */
     @Bean(destroyMethod = "close")
     public S3Presigner s3Presigner() {
         return S3Presigner.builder()

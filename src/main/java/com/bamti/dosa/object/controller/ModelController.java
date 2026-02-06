@@ -26,7 +26,18 @@ public class ModelController {
     @Value("${spring.cloud.aws.s3.bucket}")
     private String bucketName;
 
-    // 1. [수정] 3D 모델 파일 다운로드 URL 발급 (보안 적용)
+    /**
+     * Issue a presigned S3 GET URL for a model file.
+     *
+     * Validates that `filename` is not null or blank, does not attempt path traversal (no ".." or leading "/"),
+     * and has one of the allowed extensions: `.glb`, `.gltf`, or `.png`. On success returns a presigned URL
+     * that is valid for 10 minutes.
+     *
+     * @param filename the object key within the configured S3 bucket; must be non-empty, must not contain ".." or start with "/", and must end with `.glb`, `.gltf`, or `.png`
+     * @return the presigned URL to download the specified file
+     * @throws IllegalArgumentException if `filename` is null, blank, contains path traversal, or has an unsupported extension
+     * @throws RuntimeException if an error occurs while generating the presigned URL (S3 service/communication error)
+     */
     @GetMapping("/api/models")
     public ApiResponse<String> getModelUrl(@RequestParam("filename") String filename) {
 
@@ -77,7 +88,11 @@ public class ModelController {
         }
     }
 
-    // 2. 모든 3D 모델 리스트 조회 API
+    /**
+     * Retrieve all available 3D model objects.
+     *
+     * @return an ApiResponse containing a List of ModelObjectResponse representing all stored 3D model objects
+     */
     @GetMapping("/api/objects")
     public ApiResponse<List<ModelObjectResponse>> getAllObjects() {
         List<ModelObjectResponse> models = modelObjectService.getAllModels();

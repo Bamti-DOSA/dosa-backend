@@ -12,6 +12,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ModelObjectService {
 
+    /**
+     * Retrieve all predefined model objects with their assembly metadata and optional part lists.
+     *
+     * @return a List of ModelObjectResponse where each element contains objectId, name, type,
+     *         description, assemblyModelUrl, and optionally a list of PartDto entries for component parts
+     */
     public List<ModelObjectResponse> getAllModels() {
         List<ModelObjectResponse> models = new ArrayList<>();
 
@@ -70,7 +76,15 @@ public class ModelObjectService {
         return models;
     }
 
-    // 1. Suspension 부품 목록
+    /**
+     * Create the list of parts that compose the suspension assembly.
+     *
+     * Each element is a PartDto describing a suspension component with its display name,
+     * mesh identifier, and a brief description.
+     *
+     * @return a List of PartDto containing the suspension parts: "베이스" (base), "고정 너트" (nut),
+     *         "중심축 (로드)" (rod), and "코일 스프링" (spring)
+     */
     private List<PartDto> getSuspensionParts() {
         List<PartDto> parts = new ArrayList<>();
         parts.add(PartDto.builder().name("베이스").meshName("base").description("서스펜션의 하단 지지 구조물입니다.").build());
@@ -80,7 +94,11 @@ public class ModelObjectService {
         return parts;
     }
 
-    // 2. Machine Vice 부품 목록
+    /**
+     * Build the list of parts that make up a machine vice.
+     *
+     * @return a List of PartDto where each entry contains the part's display name, mesh name, and a short description
+     */
     private List<PartDto> getMachineViceParts() {
         List<PartDto> parts = new ArrayList<>();
         parts.add(PartDto.builder().name("가이드 본체").meshName("part_1_fuhrung").description("이동 죠의 움직임을 가이드하는 본체입니다.").build());
@@ -94,7 +112,13 @@ public class ModelObjectService {
         return parts;
     }
 
-    // 3. V4 Engine 부품 목록
+    /**
+     * Builds the list of parts for a V4 engine.
+     *
+     * Each entry contains the part's display name, a base `meshName` (intended for startsWith matching against mesh identifiers), and a short description.
+     *
+     * @return a list of PartDto representing the V4 engine components
+     */
     private List<PartDto> getV4EngineParts() {
         List<PartDto> parts = new ArrayList<>();
         // .001 등이 붙은 부품들은 startsWith로 처리되도록 공통 이름만 사용합니다.
