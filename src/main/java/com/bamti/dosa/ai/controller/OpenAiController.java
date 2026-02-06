@@ -55,11 +55,12 @@ public class OpenAiController {
         ChatGptResponse response = openAiService.call(request);
 
         //NULL 안정성 체크
-        if (response == null || response.getChoices() == null || response.getChoices().isEmpty()) {
-        return ChatResponseDto.fail("OpenAI로부터 응답을 받지 못했습니다.");
-    }
+        if (response == null) {
+                        return ChatResponseDto.fail("OpenAI로부터 응답을 받지 못했습니다.");
+                   }
 
-        String content = response.getChoices().get(0).getMessage().getContent();
+        String content = response.getFirstMessageContent();
+
 
         if (content == null || content.isBlank()) {
             return ChatResponseDto.fail("응답 내용이 비어있습니다.");

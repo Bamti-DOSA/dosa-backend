@@ -50,7 +50,9 @@ public class OpenAiApiCaller {
                         "OpenAI 요청 한도 초과했습니다. 잠시 후 다시 시도해 주세요."
                 );
             }
+            log.error("OpenAI client error ({}): {}", e.getStatusCode(), safeBody(e));
             throw new ResponseStatusException(
+
                     HttpStatus.BAD_GATEWAY,
                     "OpenAI 요청 처리 중 오류가 발생했습니다."
 
@@ -58,11 +60,11 @@ public class OpenAiApiCaller {
 
         }
         catch (HttpServerErrorException e) {
-            log.error("OpenAI client error ({}): {}", e.getStatusCode(), safeBody(e));
+            log.error("OpenAI server error ({}): {}", e.getStatusCode(), safeBody(e));
             // 5xx
             throw new ResponseStatusException(
                     HttpStatus.BAD_GATEWAY,
-                    "OpenAI 서버 오류(" + e.getStatusCode() + "): " + safeBody(e)
+                    "OpenAI 서버에 오류가 발생했습니다."
             );
 
         } catch (ResourceAccessException e) { // timeout/connection

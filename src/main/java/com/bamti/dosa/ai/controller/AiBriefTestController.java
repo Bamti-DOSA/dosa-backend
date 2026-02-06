@@ -17,7 +17,7 @@
 //
 //    private final OpenAiApiCaller openAiApiCaller;
 //
-//    // GET /api/briefings/mock-summary
+//    // GET /api/briefings/test
 //    @GetMapping("/test")
 //    public String mockSummary() {
 //

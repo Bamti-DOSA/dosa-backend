@@ -24,7 +24,10 @@ public class AiBriefingController {
         }
         try {
             return aiBriefingService.summarize(req);
-        } catch (Exception e) {
+        } catch (ResponseStatusException e) {
+            throw e;
+        }
+            catch (Exception e) {
             log.error("브리핑 생성 중 오류 발생", e);
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "브리핑 생성 중 오류가 발생했습니다.");
         }

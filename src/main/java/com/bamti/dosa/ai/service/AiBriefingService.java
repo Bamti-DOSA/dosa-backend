@@ -30,7 +30,7 @@ public class AiBriefingService {
 
         }
         //최대 몇개의 메시지만 요약할지 설정 !
-        int limit = req.getMaxMessages() != null ? req.getMaxMessages() : 30;
+        int limit = req.getMaxMessages() != null && req.getMaxMessages() > 0 ? req.getMaxMessages() : 30;
 
         //실제 요약에 보낼 메시지 리스트를 만듦
         List<Message> trimmed = original.size() > limit
@@ -83,6 +83,10 @@ JSON 외의 어떤 텍스트(인사말, 설명, 코드블록 ``` 등)도 절대 
         toSend.addAll(filtered);
 
         String summary = openAiApiCaller.callMessages(toSend);
+
+        if (summary == null || summary.isBlank()) {
+            return new AiBriefingResponse("요약 생성에 실패했습니다.", 0);
+        }
 
         return new AiBriefingResponse(summary, filtered.size());
     }
