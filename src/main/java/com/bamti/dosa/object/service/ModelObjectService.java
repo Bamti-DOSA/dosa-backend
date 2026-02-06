@@ -8,10 +8,20 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 3D 모델 객체 정보를 관리하고 제공하는 서비스입니다.
+ * 현재 버전에서는 하드코딩된 모델 데이터를 반환합니다.
+ */
 @Service
 @RequiredArgsConstructor
 public class ModelObjectService {
 
+    /**
+     * 시스템에 등록된 모든 3D 모델 리스트를 반환합니다.
+     * 각 모델에는 메타데이터와 부품(Part) 정보가 포함됩니다.
+     *
+     * @return 전체 3D 모델 응답 리스트
+     */
     public List<ModelObjectResponse> getAllModels() {
         List<ModelObjectResponse> models = new ArrayList<>();
 
@@ -70,7 +80,11 @@ public class ModelObjectService {
         return models;
     }
 
-    // 1. Suspension 부품 목록
+    /**
+     * Suspension 모델의 부품 목록을 생성하여 반환합니다.
+     *
+     * @return Suspension 부품(PartDto) 리스트
+     */
     private List<PartDto> getSuspensionParts() {
         List<PartDto> parts = new ArrayList<>();
         parts.add(PartDto.builder().name("베이스").meshName("base").description("서스펜션의 하단 지지 구조물입니다.").build());
@@ -80,7 +94,11 @@ public class ModelObjectService {
         return parts;
     }
 
-    // 2. Machine Vice 부품 목록
+    /**
+     * Machine Vice 모델의 부품 목록을 생성하여 반환합니다.
+     *
+     * @return Machine Vice 부품(PartDto) 리스트
+     */
     private List<PartDto> getMachineViceParts() {
         List<PartDto> parts = new ArrayList<>();
         parts.add(PartDto.builder().name("가이드 본체").meshName("part_1_fuhrung").description("이동 죠의 움직임을 가이드하는 본체입니다.").build());
@@ -94,7 +112,12 @@ public class ModelObjectService {
         return parts;
     }
 
-    // 3. V4 Engine 부품 목록
+    /**
+     * V4 Engine 모델의 부품 목록을 생성하여 반환합니다.
+     * 이름이 중복되는 부품(.001 등)은 공통 접두어(Prefix)를 사용하여 정의합니다.
+     *
+     * @return V4 Engine 부품(PartDto) 리스트
+     */
     private List<PartDto> getV4EngineParts() {
         List<PartDto> parts = new ArrayList<>();
         // .001 등이 붙은 부품들은 startsWith로 처리되도록 공통 이름만 사용합니다.

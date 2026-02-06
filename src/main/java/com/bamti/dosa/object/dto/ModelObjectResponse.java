@@ -1,10 +1,7 @@
 package com.bamti.dosa.object.dto;
 
-import com.bamti.dosa.object.entity.ModelObject;
 import lombok.Builder;
 import lombok.Getter;
-
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
