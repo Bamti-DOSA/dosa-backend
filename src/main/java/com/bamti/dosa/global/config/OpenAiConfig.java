@@ -19,7 +19,7 @@ public class OpenAiConfig {
     private String openAiKey;
 
     @Bean("openAiRestTemplate")
-    @Primary
+
     public RestTemplate openAiRestTemplate(RestTemplateBuilder builder) {
         {
             RestTemplate restTemplate = builder

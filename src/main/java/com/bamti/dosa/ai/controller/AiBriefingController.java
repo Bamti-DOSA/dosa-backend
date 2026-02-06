@@ -4,10 +4,12 @@ import com.bamti.dosa.ai.dto.AiBriefingRequest;
 import com.bamti.dosa.ai.dto.AiBriefingResponse;
 import com.bamti.dosa.ai.service.AiBriefingService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+@Slf4j
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
@@ -23,6 +25,7 @@ public class AiBriefingController {
         try {
             return aiBriefingService.summarize(req);
         } catch (Exception e) {
+            log.error("브리핑 생성 중 오류 발생", e);
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "브리핑 생성 중 오류가 발생했습니다.");
         }
 

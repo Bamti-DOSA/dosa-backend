@@ -4,6 +4,7 @@ import com.bamti.dosa.ai.dto.ChatGptRequest;
 import com.bamti.dosa.ai.dto.ChatGptResponse;
 import com.bamti.dosa.ai.dto.Message;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.*;
 
@@ -13,7 +14,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
-
+@Slf4j
 @Component
 @RequiredArgsConstructor
 //호출 컴포넌트
@@ -43,17 +44,22 @@ public class OpenAiApiCaller {
 
         } catch (HttpClientErrorException e) { // 4xx
             if (e.getStatusCode().value() == 429) {
+                log.warn("OpenAI rate limit exceeded: {}", safeBody(e));
                 throw new ResponseStatusException(
                         HttpStatus.SERVICE_UNAVAILABLE,
-                        "OpenAI 요청 한도 초과: " + safeBody(e)
+                        "OpenAI 요청 한도 초과했습니다. 잠시 후 다시 시도해 주세요."
                 );
             }
             throw new ResponseStatusException(
                     HttpStatus.BAD_GATEWAY,
-                    "OpenAI 요청 오류(" + e.getStatusCode() + "): " + safeBody(e)
+                    "OpenAI 요청 처리 중 오류가 발생했습니다."
+
             );
 
-        } catch (HttpServerErrorException e) { // 5xx
+        }
+        catch (HttpServerErrorException e) {
+            log.error("OpenAI client error ({}): {}", e.getStatusCode(), safeBody(e));
+            // 5xx
             throw new ResponseStatusException(
                     HttpStatus.BAD_GATEWAY,
                     "OpenAI 서버 오류(" + e.getStatusCode() + "): " + safeBody(e)
