@@ -4,13 +4,9 @@ import com.bamti.dosa.ai.client.OpenAiApiCaller;
 import com.bamti.dosa.ai.dto.AiBriefingRequest;
 import com.bamti.dosa.ai.dto.AiBriefingResponse;
 import com.bamti.dosa.ai.dto.Message;
-import com.bamti.dosa.ai.repository.AiRepository;
-import com.bamti.dosa.aiassistant.entity.AiAssistantChat;
-import com.bamti.dosa.aiassistant.entity.ChatMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
