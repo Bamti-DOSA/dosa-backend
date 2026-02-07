@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class ChatMessage {
+    private Long id;
     private ChatRole role;
     private String message;
     private LocalDateTime createdAt;
