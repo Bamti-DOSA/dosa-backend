@@ -29,6 +29,6 @@ public class Material {
     @Column(name = "material_description", columnDefinition = "LONGTEXT")
     private String materialDescription;
 
-    @Column(name = "image_url", length = 1000)
-    private String imageUrl;
+    @Column(name = "material_image_url", length = 1000)
+    private String materialImageUrl;
 }

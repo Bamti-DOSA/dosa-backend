@@ -37,6 +37,9 @@ public class Part {
     @Column(name = "mesh_name", nullable = false, length = 255)
     private String meshName;
 
+    @Column(name = "part_image_url", length = 1000)
+    private String partImageUrl;
+
     @OneToMany(mappedBy = "part", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     private List<Material> materials = new ArrayList<>();
