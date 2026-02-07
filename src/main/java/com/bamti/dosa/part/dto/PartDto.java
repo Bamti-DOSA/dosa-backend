@@ -34,7 +34,7 @@ public class PartDto {
         public static PartDetail from(Part part) {
             return new PartDetail(
                     part.getPartId(),
-                    part.getObject().getObjectId(),
+                    part.getObject() != null ? part.getObject().getObjectId() : null,
                     part.getName(),
                     part.getMeshName(),
                     part.getDescription(),
