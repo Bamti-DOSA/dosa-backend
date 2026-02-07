@@ -39,6 +39,9 @@ dependencies {
 
 	// 테스트 라이브러리들도 정리 (보통 이거 하나면 다 됩니다)
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	//스웨거
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
 }
 
 tasks.named('test') {
