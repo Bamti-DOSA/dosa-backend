@@ -3,7 +3,6 @@ package com.bamti.dosa.ai.service;
 import com.bamti.dosa.ai.client.OpenAiApiCaller;
 import com.bamti.dosa.ai.dto.ChatGptRequest;
 import com.bamti.dosa.ai.dto.ChatGptResponse;
-import com.bamti.dosa.ai.repository.AiRepository;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
