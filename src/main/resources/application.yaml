@@ -2,8 +2,8 @@ server:
   port: 8080
   # [팀원 추가] 에러 발생 시 상세 내용을 보여줌 (디버깅용)
   error:
-    include-message: always
-    include-binding-errors: always
+    include-message: never
+    include-binding-errors: never
   # 한글 깨짐 방지
   servlet:
     encoding:
