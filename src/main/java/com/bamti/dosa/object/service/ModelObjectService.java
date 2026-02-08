@@ -23,9 +23,6 @@ public class ModelObjectService {
      *
      * @return 전체 3D 모델 응답 리스트
      */
-    // S3 버킷 기본 주소
-    private static final String S3_BASE_URL = "https://dosa-3d-models.s3.ap-northeast-2.amazonaws.com/";
-
     public List<ModelObjectResponse> getAllModels() {
         List<ModelObjectResponse> models = new ArrayList<>();
 
@@ -35,10 +32,8 @@ public class ModelObjectService {
                 .name("Drone")
                 .type("Robotics & Automation")
                 .description("고성능 카메라와 정밀 제어 시스템을 탑재한 다목적 드론입니다.")
-                // [수정] 경로: drone/completed/drone_final.png
-                .assemblyModelUrl(S3_BASE_URL + "drone/completed/drone_final.png")
-                // [수정] 경로: drone/thumbnail/drone_thumbnail.png
-                .thumbnailUrl(S3_BASE_URL + "drone/thumbnail/drone_thumbnail.png")
+                .assemblyModelUrl("drone/completed/drone_final.png")
+                .thumbnailUrl("drone/thumbnail/drone_thumbnail.png")
                 .parts(Collections.emptyList())
                 .build());
 
@@ -48,8 +43,8 @@ public class ModelObjectService {
                 .name("Leaf Spring")
                 .type("Automotive & Parts")
                 .description("트럭 및 대형 차량의 충격을 흡수하는 판스프링 서스펜션입니다.")
-                .assemblyModelUrl(S3_BASE_URL + "leaf_spring/completed/leaf_spring_final.png")
-                .thumbnailUrl(S3_BASE_URL + "leaf_spring/thumbnail/leaf_spring_thumbnail.png")
+                .assemblyModelUrl("leaf_spring/completed/leaf_spring_final.png")
+                .thumbnailUrl("leaf_spring/thumbnail/leaf_spring_thumbnail.png")
                 .parts(Collections.emptyList())
                 .build());
 
@@ -59,8 +54,8 @@ public class ModelObjectService {
                 .name("Machine Vice")
                 .type("Industrial Tools")
                 .description("가공 작업을 위해 공작물을 강력하게 고정하는 정밀 머신 바이스입니다.")
-                .assemblyModelUrl(S3_BASE_URL + "machine_vice/completed/machine_vice_final.glb")
-                .thumbnailUrl(S3_BASE_URL + "machine_vice/thumbnail/machine_vice_thumbnail.png")
+                .assemblyModelUrl("machine_vice/completed/machine_vice_final.glb")
+                .thumbnailUrl("machine_vice/thumbnail/machine_vice_thumbnail.png")
                 .parts(getMachineViceParts())
                 .build());
 
@@ -70,8 +65,8 @@ public class ModelObjectService {
                 .name("Robot Arm")
                 .type("Robotics & Automation")
                 .description("6축 다관절 산업용 로봇 팔입니다.")
-                .assemblyModelUrl(S3_BASE_URL + "robot_arm/completed/robot_arm_final.png")
-                .thumbnailUrl(S3_BASE_URL + "robot_arm/thumbnail/robot_arm_thumbnail.png")
+                .assemblyModelUrl("robot_arm/completed/robot_arm_final.png")
+                .thumbnailUrl("robot_arm/thumbnail/robot_arm_thumbnail.png")
                 .parts(Collections.emptyList())
                 .build());
 
@@ -81,8 +76,8 @@ public class ModelObjectService {
                 .name("Robot Gripper")
                 .type("Robotics & Automation")
                 .description("로봇 팔 끝단에 부착하여 물체를 잡거나 옮기는 그리퍼 모듈입니다.")
-                .assemblyModelUrl(S3_BASE_URL + "robot_gripper/completed/robot_gripper_final.png")
-                .thumbnailUrl(S3_BASE_URL + "robot_gripper/thumbnail/robot_gripper_thumbnail.png")
+                .assemblyModelUrl("robot_gripper/completed/robot_gripper_final.png")
+                .thumbnailUrl("robot_gripper/thumbnail/robot_gripper_thumbnail.png")
                 .parts(Collections.emptyList())
                 .build());
 
@@ -92,8 +87,8 @@ public class ModelObjectService {
                 .name("Suspension")
                 .type("Automotive & Parts")
                 .description("차체의 진동을 제어하고 승차감을 향상시키는 코일오버 서스펜션 시스템입니다.")
-                .assemblyModelUrl(S3_BASE_URL + "suspension/completed/suspension_final.glb")
-                .thumbnailUrl(S3_BASE_URL + "suspension/thumbnail/suspension_thumbnail.png")
+                .assemblyModelUrl("suspension/completed/suspension_final.glb")
+                .thumbnailUrl("suspension/thumbnail/suspension_thumbnail.png")
                 .parts(getSuspensionParts())
                 .build());
 
@@ -103,8 +98,8 @@ public class ModelObjectService {
                 .name("V4 Engine")
                 .type("Mechanical Engineering")
                 .description("컴팩트한 크기에 강력한 출력을 내는 V형 4기통 엔진입니다.")
-                .assemblyModelUrl(S3_BASE_URL + "v_4_engine/completed/v_4_engine_final.glb")
-                .thumbnailUrl(S3_BASE_URL + "v_4_engine/thumbnail/v_4_engine_thumbnail.png")
+                .assemblyModelUrl("v_4_engine/completed/v_4_engine_final.glb")
+                .thumbnailUrl("v_4_engine/thumbnail/v_4_engine_thumbnail.png")
                 .parts(getV4EngineParts())
                 .build());
 
