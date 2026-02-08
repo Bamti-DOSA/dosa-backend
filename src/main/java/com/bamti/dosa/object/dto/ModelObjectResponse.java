@@ -23,5 +23,6 @@ public class ModelObjectResponse {
         private String meshName;  // ★ 3D 모델 내부의 영문 ID (예: "shaft_main")
         private String description; // 부품 설명
         private String partImageUrl;
+        private String partUrl;
     }
 }
