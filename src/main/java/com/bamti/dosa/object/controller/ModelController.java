@@ -3,6 +3,7 @@ package com.bamti.dosa.object.controller;
 import com.bamti.dosa.global.response.ApiResponse;
 import com.bamti.dosa.object.dto.ModelObjectResponse;
 import com.bamti.dosa.object.service.ModelObjectService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j; // 로그를 위해 추가
 import org.springframework.beans.factory.annotation.Value;
@@ -17,10 +18,7 @@ import software.amazon.awssdk.services.s3.presigner.model.GetObjectPresignReques
 import java.time.Duration;
 import java.util.List;
 
-/**
- * 3D 모델 관련 요청을 처리하는 컨트롤러입니다.
- * 모델 목록 조회 및 S3 파일 다운로드용 Presigned URL 발급 기능을 제공합니다.
- */
+@Tag(name = "3D Model API", description = "3D 모델(엔진, 로봇팔 등) 및 부품 정보 조회 by 우혁")
 @Slf4j // 로깅 활성화
 @RestController
 @RequiredArgsConstructor
