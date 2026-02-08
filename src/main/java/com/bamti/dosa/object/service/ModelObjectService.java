@@ -127,14 +127,63 @@ public class ModelObjectService {
      */
     private List<PartDto> getMachineViceParts() {
         List<PartDto> parts = new ArrayList<>();
-        parts.add(PartDto.builder().name("가이드 본체").meshName("part_1_fuhrung").description("이동 죠의 움직임을 가이드하는 본체입니다.").build());
-        parts.add(PartDto.builder().name("고정 죠").meshName("part_2_feste_backe").description("물체를 고정하는 움직이지 않는 턱입니다.").build());
-        parts.add(PartDto.builder().name("이동 죠").meshName("part_3_lose_backe").description("스크류에 의해 전후로 움직이는 턱입니다.").build());
-        parts.add(PartDto.builder().name("스크류 소켓").meshName("part_4_spindelsockel").description("회전 스크류를 지지하는 소켓 부품입니다.").build());
-        parts.add(PartDto.builder().name("클램핑 죠").meshName("part_5_spannbacke").description("공작물을 직접 압착하는 플레이트입니다.").build());
-        parts.add(PartDto.builder().name("가이드 레일").meshName("part_6_fuhrungschiene").description("죠의 정밀한 직선 운동을 돕는 레일입니다.").build());
-        parts.add(PartDto.builder().name("사다리꼴 스크류").meshName("part_7_trapez_spindel").description("회전력을 직선 운동으로 바꾸는 핵심 나사입니다.").build());
-        parts.add(PartDto.builder().name("기본 베이스").meshName("part_8_grundplatte").description("바이스 전체를 지탱하는 바닥 판입니다.").build());
+
+        parts.add(PartDto.builder()
+                .name("가이드 본체")
+                .meshName("part_1_fuhrung")
+                .description("이동 죠의 움직임을 가이드하는 본체입니다.")
+                .partUrl("machine_vice/parts/part_1_fuhrung.glb") // 추가됨
+                .build());
+
+        parts.add(PartDto.builder()
+                .name("고정 죠")
+                .meshName("part_2_feste_backe")
+                .description("물체를 고정하는 움직이지 않는 턱입니다.")
+                .partUrl("machine_vice/parts/part_2_feste_backe.glb")
+                .build());
+
+        parts.add(PartDto.builder()
+                .name("이동 죠")
+                .meshName("part_3_lose_backe")
+                .description("스크류에 의해 전후로 움직이는 턱입니다.")
+                .partUrl("machine_vice/parts/part_3_lose_backe.glb")
+                .build());
+
+        parts.add(PartDto.builder()
+                .name("스크류 소켓")
+                .meshName("part_4_spindelsockel")
+                .description("회전 스크류를 지지하는 소켓 부품입니다.")
+                .partUrl("machine_vice/parts/part_4_spindelsockel.glb")
+                .build());
+
+        parts.add(PartDto.builder()
+                .name("클램핑 죠")
+                .meshName("part_5_spannbacke")
+                .description("공작물을 직접 압착하는 플레이트입니다.")
+                .partUrl("machine_vice/parts/part_5_spannbacke.glb")
+                .build());
+
+        parts.add(PartDto.builder()
+                .name("가이드 레일")
+                .meshName("part_6_fuhrungschiene")
+                .description("죠의 정밀한 직선 운동을 돕는 레일입니다.")
+                .partUrl("machine_vice/parts/part_6_fuhrungschiene.glb")
+                .build());
+
+        parts.add(PartDto.builder()
+                .name("사다리꼴 스크류")
+                .meshName("part_7_trapez_spindel")
+                .description("회전력을 직선 운동으로 바꾸는 핵심 나사입니다.")
+                .partUrl("machine_vice/parts/part_7_trapez_spindel.glb")
+                .build());
+
+        parts.add(PartDto.builder()
+                .name("기본 베이스")
+                .meshName("part_8_grundplatte")
+                .description("바이스 전체를 지탱하는 바닥 판입니다.")
+                .partUrl("machine_vice/parts/part_8_grundplatte.glb")
+                .build());
+
         return parts;
     }
 
