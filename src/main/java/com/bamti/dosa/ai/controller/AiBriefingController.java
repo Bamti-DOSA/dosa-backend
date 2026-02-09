@@ -1,7 +1,7 @@
 package com.bamti.dosa.ai.controller;
 
-import com.bamti.dosa.ai.dto.AiBriefingRequest;
-import com.bamti.dosa.ai.dto.AiBriefingResponse;
+import com.bamti.dosa.ai.dto.briefing.AiBriefingRequest;
+import com.bamti.dosa.ai.dto.briefing.AiBriefingResponse;
 import com.bamti.dosa.ai.service.AiBriefingService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

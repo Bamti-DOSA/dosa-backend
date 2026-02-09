@@ -1,4 +1,4 @@
-package com.bamti.dosa.ai.dto;
+package com.bamti.dosa.ai.dto.briefing;
 
 
 import lombok.AllArgsConstructor;

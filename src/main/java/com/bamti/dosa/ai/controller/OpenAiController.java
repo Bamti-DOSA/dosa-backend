@@ -4,8 +4,8 @@ package com.bamti.dosa.ai.controller;
 import com.bamti.dosa.ai.domain.enums.ProductSystemPrompt;
 import com.bamti.dosa.ai.dto.ChatGptRequest;
 import com.bamti.dosa.ai.dto.ChatGptResponse;
-import com.bamti.dosa.ai.dto.ChatRequestBody;
-import com.bamti.dosa.ai.dto.ChatResponseDto;
+import com.bamti.dosa.ai.dto.chat.ChatRequestBody;
+import com.bamti.dosa.ai.dto.chat.ChatResponseDto;
 import com.bamti.dosa.ai.service.OpenAiService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-@Tag(name = "3. AI Chat API", description = "AI 도사와의 실시간 채팅 by 서영")
+@Tag(name = "AI Chat API", description = "AI 도사와의 실시간 채팅 by 서영")
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor

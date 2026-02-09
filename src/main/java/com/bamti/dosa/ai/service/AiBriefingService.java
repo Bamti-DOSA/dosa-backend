@@ -1,8 +1,8 @@
 package com.bamti.dosa.ai.service;
 
 import com.bamti.dosa.ai.client.OpenAiApiCaller;
-import com.bamti.dosa.ai.dto.AiBriefingRequest;
-import com.bamti.dosa.ai.dto.AiBriefingResponse;
+import com.bamti.dosa.ai.dto.briefing.AiBriefingRequest;
+import com.bamti.dosa.ai.dto.briefing.AiBriefingResponse;
 import com.bamti.dosa.ai.dto.Message;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
