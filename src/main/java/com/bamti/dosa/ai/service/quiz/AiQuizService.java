@@ -51,7 +51,8 @@ public class AiQuizService {
             }
             """;
 
-        String userPrompt = "주제: " + topic + "에 대한 퀴즈를 만들어줘.";
+        String userPrompt = "주제: " + topic + "에 대한 퀴즈를 만들어줘."
+                + (req.getDifficulty() != null ? " 난이도: " + req.getDifficulty() : "");
 
         List<Message> messages = new ArrayList<>();
         messages.add(new Message("system", systemPrompt));
@@ -60,6 +61,9 @@ public class AiQuizService {
         try {
             // OpenAI 호출
             String jsonResponse = openAiApiCaller.callMessages(messages);
+            if (jsonResponse == null || jsonResponse.isBlank()) {
+                throw new RuntimeException("AI 응답이 비어 있습니다.");
+            }
 
             // 혹시라도 AI가 ```json ... ``` 형태로 줄 경우를 대비해 태그 제거
             jsonResponse = jsonResponse.replace("```json", "").replace("```", "").trim();
@@ -70,7 +74,7 @@ public class AiQuizService {
         } catch (Exception e) {
             log.error("퀴즈 생성 실패", e);
             // 실패 시 빈 응답 대신 에러 메시지를 담은 객체 반환 (혹은 예외 던지기)
-            throw new RuntimeException("퀴즈 생성 중 오류가 발생했습니다.");
+            throw new RuntimeException("퀴즈 생성 중 오류가 발생했습니다.", e);
         }
     }
 }
