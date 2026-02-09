@@ -1,4 +1,4 @@
-package com.bamti.dosa.ai.dto;
+package com.bamti.dosa.ai.dto.chat;
 
 import lombok.Getter;
 import lombok.Setter;

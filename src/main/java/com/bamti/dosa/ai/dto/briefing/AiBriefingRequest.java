@@ -1,5 +1,6 @@
-package com.bamti.dosa.ai.dto;
+package com.bamti.dosa.ai.dto.briefing;
 
+import com.bamti.dosa.ai.dto.Message;
 import lombok.Data;
 
 import java.util.List;
