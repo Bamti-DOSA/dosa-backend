@@ -65,7 +65,7 @@ public class ModelObjectService {
                 .name("Robot Arm")
                 .type("Robotics & Automation")
                 .description("6축 다관절 구조를 통해 사람의 팔과 유사한 자유도를 구현한 산업용 로봇입니다. 각 관절마다 고정밀 서보 모터와 감속기를 장착하여 반복 정밀도가 우수하며, 용접, 도장, 조립 등 다양한 공정 자동화에 활용됩니다. 역운동학(Inverse Kinematics) 해석을 통해 복잡한 궤적 제어가 가능합니다.")
-                .assemblyModelUrl("robot_arm/completed/robot_arm_final.png")
+                .assemblyModelUrl("robot_arm/completed/robot_arm_final.glb")
                 .thumbnailUrl("robot_arm/thumbnail/robot_arm_thumbnail.png")
                 .parts(getRobotArmParts())
                 .build());
