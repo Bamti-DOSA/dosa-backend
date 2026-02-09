@@ -67,7 +67,7 @@ public class ModelObjectService {
                 .description("6축 다관절 구조를 통해 사람의 팔과 유사한 자유도를 구현한 산업용 로봇입니다. 각 관절마다 고정밀 서보 모터와 감속기를 장착하여 반복 정밀도가 우수하며, 용접, 도장, 조립 등 다양한 공정 자동화에 활용됩니다. 역운동학(Inverse Kinematics) 해석을 통해 복잡한 궤적 제어가 가능합니다.")
                 .assemblyModelUrl("robot_arm/completed/robot_arm_final.png")
                 .thumbnailUrl("robot_arm/thumbnail/robot_arm_thumbnail.png")
-                .parts(Collections.emptyList())
+                .parts(getRobotArmParts())
                 .build());
 
         // 5. Robot Gripper (로봇 그리퍼)
@@ -202,6 +202,73 @@ public class ModelObjectService {
                 .meshName("part_8_grundplatte")
                 .description("바이스 전체의 강성을 유지하고 절삭력을 바닥으로 분산시키는 주물 바디입니다.\n무게: 약 12.5kg\n\n⚠️ 주의사항: 설치 시 수평계 사용하여 0.02mm/m 이내 레벨링\n\n📖 시험 포인트:\n- 주조 공정 및 잔류 응력 제거(Annealing)\n- 단면 2차 모멘트(I)와 굽힘 강성(EI)\n- 진동 감쇠능(Damping Capacity) 비교 (주철 vs 강)")
                 .partUrl("machine_vice/parts/part_8_grundplatte.glb")
+                .build());
+
+        return parts;
+    }
+
+    /**
+     * Robot Arm 모델의 부품 목록을 생성하여 반환합니다.
+     *
+     * @return Robot Arm 부품(PartDto) 리스트
+     */
+    private List<PartDto> getRobotArmParts() {
+        List<PartDto> parts = new ArrayList<>();
+
+        parts.add(PartDto.builder()
+                .name("Rotating Base")
+                .meshName("base")
+                .description("로봇 암 전체를 지탱하고 회전축을 제공하는 고정 베이스입니다.\n무게: 약 8.5kg\n\n⚠️ 주의사항: 회전 범위 ±180도 제한, 케이블 꼬임 방지\n\n📖 시험 포인트:\n- 회전 관성 모멘트 (I = mr²)\n- 베어링 하중 계산\n- 모터 토크 선정 기준")
+                .partUrl("robot_arm/parts/base.glb")
+                .build());
+
+        parts.add(PartDto.builder()
+                .name("Shoulder Joint")
+                .meshName("part_2")
+                .description("베이스와 연결되어 수직 운동을 담당하는 어깨 관절입니다.\n최대 토크: 50N·m\n무게: 약 6.2kg\n\n⚠️ 주의사항: 과부하 시 모터 과열 위험\n\n📖 시험 포인트:\n- 관절 가동 범위(ROM)\n- 특이점(Singularity) 회피\n- 역기구학(Inverse Kinematics) 계산")
+                .partUrl("robot_arm/parts/part_2.glb")
+                .build());
+
+        parts.add(PartDto.builder()
+                .name("Upper Arm Link")
+                .meshName("part_3")
+                .description("로봇 팔의 상완부로 주요 동작 범위를 제공합니다.\n길이: 450mm (중공 구조)\n무게: 약 3.8kg\n\n⚠️ 주의사항: 최대 가반하중 5kg 초과 금지\n\n📖 시험 포인트:\n- 보(Beam) 처짐 계산\n- 좌굴 하중 분석\n- 중공 구조의 2차 모멘트")
+                .partUrl("robot_arm/parts/part_3.glb")
+                .build());
+
+        parts.add(PartDto.builder()
+                .name("Elbow Joint")
+                .meshName("part_4")
+                .description("상완과 하완을 연결하며 굽힘 동작을 수행하는 팔꿈치 관절입니다.\n감속비: 1:100\n무게: 약 4.5kg\n\n⚠️ 주의사항: 백래시 0.02도 이내 유지 필요\n\n📖 시험 포인트:\n- 하모닉 드라이브 원리\n- 백래시와 정밀도의 관계\n- 토크 증폭 메커니즘")
+                .partUrl("robot_arm/parts/part_4.glb")
+                .build());
+
+        parts.add(PartDto.builder()
+                .name("Forearm Link")
+                .meshName("part_5")
+                .description("로봇 팔의 하완부로 정밀한 위치 제어를 담당합니다.\n길이: 380mm\n무게: 약 2.6kg\n\n⚠️ 주의사항: 충격에 취약, 낙하 방지 필수\n\n📖 시험 포인트:\n- 비강도(Specific Strength) 개념\n- 동적 하중과 정적 하중\n- 강성 설계와 진동 특성")
+                .partUrl("robot_arm/parts/part_5.glb")
+                .build());
+
+        parts.add(PartDto.builder()
+                .name("Wrist Pitch Joint")
+                .meshName("part_6")
+                .description("하완과 엔드 이펙터를 연결하는 손목 관절입니다.\n회전 범위: ±90도\n무게: 약 1.8kg\n\n⚠️ 주의사항: 케이블 배선 간섭 주의\n\n📖 시험 포인트:\n- 3축 손목 메커니즘\n- 짐벌락(Gimbal Lock) 현상\n- 오일러 각과 쿼터니언 변환")
+                .partUrl("robot_arm/parts/part_6.glb")
+                .build());
+
+        parts.add(PartDto.builder()
+                .name("Wrist Roll Joint")
+                .meshName("part_7")
+                .description("엔드 이펙터의 방향을 조절하는 손목 회전 부품입니다.\n회전 범위: ±270도\n무게: 약 1.2kg\n\n⚠️ 주의사항: 연속 회전 시 슬립링 마모 점검\n\n📖 시험 포인트:\n- 슬립링 원리와 구조\n- 연속 회전 메커니즘\n- 전력/신호 전달 방식")
+                .partUrl("robot_arm/parts/part_7.glb")
+                .build());
+
+        parts.add(PartDto.builder()
+                .name("Tool Flange")
+                .meshName("part_8")
+                .description("그리퍼나 도구를 장착할 수 있는 엔드 이펙터 마운트입니다.\n규격: ISO 9409-1-50\n무게: 약 0.5kg\n\n⚠️ 주의사항: 체결 토크 8N·m 준수\n\n📖 시험 포인트:\n- 표준 인터페이스 규격\n- 센터링 정밀도\n- 반복 위치 정밀도(Repeatability)")
+                .partUrl("robot_arm/parts/part_8.glb")
                 .build());
 
         return parts;
